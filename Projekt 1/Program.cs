@@ -63,3 +63,4 @@ while (YAxel.Count < 7)
     YAxel.Add(YAxelnr);
 }
 Console.ReadLine();
+hej
