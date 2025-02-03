@@ -56,8 +56,6 @@ static List<string> Cordinater(int cordinat)
     return xAxel;
 }
 
-
-
 void main()
 {
     while (true)
@@ -196,11 +194,11 @@ void karta()
 
 void spelet()
 {
-    bool rutaAnvänd= true;
-    string cord = xAxel[x-1] + yAxel[y-1];
-    for(int r = 0; r<användKordinatLista.Count; r++)
+    bool rutaAnvänd = true;
+    string cord = xAxel[x - 1] + yAxel[y - 1];
+    for (int r = 0; r < användKordinatLista.Count; r++)
     {
-        if(cord == användKordinatLista[r])
+        if (cord == användKordinatLista[r])
         {
             rutaAnvänd = false;
         }
@@ -208,11 +206,11 @@ void spelet()
     if (rutaAnvänd == true)
     {
         // Skrev denna kod med ai
-            Dictionary<string, Action> functionMap = new Dictionary<string, Action>
+        Dictionary<string, Action> functionMap = new Dictionary<string, Action>
         {
             { "11", f11 },
             { "12", f12 },
-            // { "13", f13 },
+            { "13", f13 },
             // { "14", f14 },
             // { "15", f15 },
             // { "16", f16 },
@@ -241,7 +239,7 @@ void spelet()
             // { "55", f55 },
             // { "56", f56 }
         };
-            if (functionMap.TryGetValue(cord, out Action action))
+        if (functionMap.TryGetValue(cord, out Action action))
         {
             action();
         }
@@ -254,8 +252,34 @@ void spelet()
 
 void användKordinat()
 {
-    string användKordinatTillägg = xAxel[x-1] + yAxel[y-1];
+    string användKordinatTillägg = xAxel[x - 1] + yAxel[y - 1];
     användKordinatLista.Add(användKordinatTillägg);
+}
+
+void livFunction()
+{
+    liv--;
+    if (liv == 2)
+    {
+        System.Console.WriteLine("Du känner hur labyrinten skakar och ett stort stenblock faller ner precis bredvid dig (du har 2 liv kvar)");
+    }
+    if (liv == 1)
+    {
+        System.Console.WriteLine("Från den bortre väggen skuts det ut en pil som snuddar vid dit öra ( du har 1 liv kvar)");
+    }
+    if (liv == 0)
+    {
+        System.Console.WriteLine("Du hör ett gigantiskt muller samtidigt som du ser sprickor börjar formas i väggarna. Plötsligt ryker hela labyrinten ihop och du blir levande begravd.");
+        tackFörMig();
+    }
+
+}
+
+static void tackFörMig()
+{
+    System.Console.WriteLine("tack för du spelat spelet! hoppas du hade kul");
+    Console.ReadLine();
+    Environment.Exit(0);
 }
 
 void f11()
@@ -283,8 +307,7 @@ void f11()
     }
     if (svar != nrVal)
     {
-        liv--;
-        System.Console.WriteLine("Oj, du hade fel det ramlar ner stenar från taken som hamnar 10 centimeter till vänster om dig (du har 2 liv kvar)");
+        livFunction();
     }
     else
     {
@@ -292,6 +315,7 @@ void f11()
     }
     användKordinat();
 }
+
 void f12()
 {
     // andra rummet i kordinaterna 1,2 som är random är ett simpelt gåt spel.
@@ -304,7 +328,7 @@ void f12()
         System.Console.WriteLine("Fel svar, du går fram och läser gåtan mot din vilja");
     }
     System.Console.WriteLine("Gåtan lyder: 10 guldfiskar är i en skål");
-    System.Console.WriteLine("2 drunknar "); 
+    System.Console.WriteLine("2 drunknar ");
     System.Console.WriteLine("3 simmar iväg");
     System.Console.WriteLine(" 4 dör plötsligt");
     System.Console.WriteLine("Hur många är kvar i skålen?");
@@ -318,10 +342,10 @@ void f12()
             System.Console.WriteLine("rätt svar snyggt");
             break;
         }
-        else if (svar.ToLower() == "b" || svar.ToLower() == "c" || svar.ToLower() == "d" )
+        else if (svar.ToLower() == "b" || svar.ToLower() == "c" || svar.ToLower() == "d")
         {
             System.Console.WriteLine("fel svar");
-            liv--;
+            livFunction();
             break;
         }
         else
@@ -329,6 +353,14 @@ void f12()
             System.Console.WriteLine("Det finns ingen knapp som har det där på sig");
         }
     }
+    Console.ReadLine();
     Console.Clear();
     System.Console.WriteLine("Du kan gå vidare");
+    användKordinat();
 }
+
+void f13()
+{
+
+}
+
